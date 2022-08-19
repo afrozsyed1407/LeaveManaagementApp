@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:panelStretchLayout id="psl1">
+          <f:facet name="bottom"/>
+          <f:facet name="center">
+            <af:decorativeBox id="db1" styleClass="AFStretchWidth">
+              <f:facet name="center">
+                <af:panelGroupLayout id="pgl1" halign="center"
+                                     styleClass="AFStretchWidth"
+                                     layout="vertical">
+                  <af:outputText value="Something went wrong or You are not Authorised to Visit this page."
+                                 id="ot1"
+                                 inlineStyle="font-family:'Times New Roman', 'Arial Black', times, Serif; font-size:large;"/>
+                  <af:spacer width="10" height="10" id="s1"/>
+                  <af:panelGroupLayout id="pgl2">
+                    <af:outputText value="Go to Login Page" id="ot2"/>
+                    <af:commandButton text="    LOGIN    " id="cb1"
+                                      action="login"/>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="top"/>
+            </af:decorativeBox>
+          </f:facet>
+          <f:facet name="start"/>
+          <f:facet name="end"/>
+          <f:facet name="top"/>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

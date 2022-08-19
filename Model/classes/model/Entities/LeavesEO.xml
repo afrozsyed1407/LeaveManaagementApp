@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LeavesEO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="LEAVES_1"
+  AliasName="LeavesEO"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="model.Entities.LeavesEOImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="LeaveId"
+    IsNotNull="true"
+    ColumnName="LEAVE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LEAVES_1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="EmployeeId"
+    ColumnName="EMPLOYEE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="LEAVES_1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LeaveType"
+    Precision="20"
+    ColumnName="LEAVE_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LEAVES_1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FromDate"
+    ColumnName="FROM_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="LEAVES_1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ToDate"
+    ColumnName="TO_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="LEAVES_1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Reason"
+    Precision="200"
+    ColumnName="REASON"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LEAVES_1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Status"
+    Precision="20"
+    ColumnName="STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="LEAVES_1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AppliedDate"
+    ColumnName="APPLIED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="LEAVES_1">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="EmployeesEO"
+    Association="model.Entities.Association.Leaves1Employees1Fk1Assoc"
+    AssociationEnd="model.Entities.Association.Leaves1Employees1Fk1Assoc.EmployeesEO"
+    AssociationOtherEnd="model.Entities.Association.Leaves1Employees1Fk1Assoc.LeavesEO"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="EmployeesEO1"
+    Association="model.Entities.Leaves1Employees1Fk1Assoc"
+    AssociationEnd="model.Entities.Leaves1Employees1Fk1Assoc.EmployeesEO1"
+    AssociationOtherEnd="model.Entities.Leaves1Employees1Fk1Assoc.LeavesEO1"
+    Type="model.Entities.EmployeesEOImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="Leaves1Pk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="LEAVES_1_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.Entities.LeavesEO.LeaveId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC008632">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C008632"/>
+      <Attr Name="_checkCondition" Value='"LEAVE_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.Entities.LeavesEO.LeaveId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="Leaves1Employees1Fk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="EMPLOYEES_1_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="LEAVES_1_EMPLOYEES_1_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.Entities.LeavesEO.EmployeeId"/>
+    </AttrArray>
+  </Key>
+</Entity>

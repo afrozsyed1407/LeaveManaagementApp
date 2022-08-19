@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+        <af:panelStretchLayout id="psl1">
+          <f:facet name="bottom"/>
+          <f:facet name="center">
+            <af:decorativeBox id="db1">
+              <f:facet name="center">
+                <af:panelGroupLayout layout="scroll"
+                                     xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pgl1">
+                  <af:panelFormLayout id="pfl1">
+                    <f:facet name="footer"/>
+                    <af:inputText label="User Id" id="it1" required="true"
+                                  requiredMessageDetail="User Id Cannot be Null"
+                                  binding="#{LoginBean.empIdBind}"/>
+                    <af:inputText label="Password" id="it2" secret="true"
+                                  required="true"
+                                  requiredMessageDetail="Password Cannot be Null"
+                                  binding="#{LoginBean.passwordBind}"/>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:commandButton text="  LOGIN  " id="cb1"
+                                      action="#{LoginBean.loginAction}"/>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="top"/>
+            </af:decorativeBox>
+          </f:facet>
+          <f:facet name="start"/>
+          <f:facet name="end"/>
+          <f:facet name="top"/>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

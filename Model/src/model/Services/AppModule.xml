@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppModule"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  ClearCacheOnRollback="true">
+  <DesignTime>
+    <Attr Name="_deployType" Value="0"/>
+  </DesignTime>
+  <ViewUsage
+    Name="EmployeesVO"
+    ViewObjectName="model.Views.EmployeesVO"/>
+  <ViewUsage
+    Name="LeavesVO"
+    ViewObjectName="model.Views.LeavesVO"/>
+  <ViewUsage
+    Name="LoggedEmpVO"
+    ViewObjectName="model.Views.EmployeesVO">
+    <ViewCriteriaUsage
+      Name="EmpByIdVC"
+      FullName="model.Views.EmployeesVO.EmpByIdVC"/>
+    <ParameterMap>
+      <PIMap Variable="B_EmpId">
+        <TransientExpression><![CDATA[adf.context.sessionScope.employeeId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewUsage>
+  <ViewUsage
+    Name="EmpLeavesVO"
+    ViewObjectName="model.Views.LeavesVO">
+    <ViewCriteriaUsage
+      Name="LeavesByEmpIdVC"
+      FullName="model.Views.LeavesVO.LeavesByEmpIdVC"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="AllEmployeesVO1"
+    ViewObjectName="model.Views.AllEmployeesVO"/>
+  <ViewUsage
+    Name="LeavesForApproval"
+    ViewObjectName="model.Views.LeavesVO">
+    <ViewCriteriaUsage
+      Name="LeavesByStatus"
+      FullName="model.Views.LeavesVO.LeavesByStatus"/>
+  </ViewUsage>
+</AppModule>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="LoginView">
+    <page>/LoginView.jspx</page>
+  </view>
+  <view id="MainView">
+    <page>/MainView.jspx</page>
+  </view>
+  <view id="errorView">
+    <page>/errorView.jspx</page>
+  </view>
+  <control-flow-rule id="__5">
+    <from-activity-id id="__6">LoginView</from-activity-id>
+    <control-flow-case id="__7">
+      <from-outcome id="__9">okgo</from-outcome>
+      <to-activity-id id="__8">MainView</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__11">
+      <from-outcome id="__12">error</from-outcome>
+      <to-activity-id id="__10">errorView</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__13">
+    <from-activity-id id="__14">MainView</from-activity-id>
+    <control-flow-case id="__15">
+      <from-outcome id="__17">error</from-outcome>
+      <to-activity-id id="__16">errorView</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__28">
+      <from-outcome id="__29">goBack</from-outcome>
+      <to-activity-id id="__27">LoginView</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__18">
+    <from-activity-id id="__19">errorView</from-activity-id>
+    <control-flow-case id="__21">
+      <from-outcome id="__22">login</from-outcome>
+      <to-activity-id id="__20">LoginView</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__4">
+    <managed-bean-name id="__3">LoginBean</managed-bean-name>
+    <managed-bean-class id="__1">view.bean.LoginBean</managed-bean-class>
+    <managed-bean-scope id="__2">session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__25">
+    <managed-bean-name id="__26">mainPageBean</managed-bean-name>
+    <managed-bean-class id="__23">view.bean.MainPageBean</managed-bean-class>
+    <managed-bean-scope id="__24">request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

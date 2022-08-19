@@ -1,0 +1,691 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelStretchLayout id="psl1">
+          <f:facet name="bottom"/>
+          <f:facet name="center">
+            <af:panelStretchLayout id="psl3">
+              <f:facet name="bottom"/>
+              <f:facet name="center">
+                <af:panelTabbed id="pt1">
+                  <af:showDetailItem text="DashBoard" id="sdi1"
+                                     stretchChildren="first">
+                    <af:decorativeBox id="db1">
+                      <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll"
+                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                             id="pgl8">
+                          <af:panelBox text="Welcome" id="pb1"
+                                       styleClass="AFStretchWidth">
+                            <f:facet name="toolbar">
+                              <af:commandButton text="commandButton 1"
+                                                id="cb9" action="goBack"
+                                                actionListener="#{mainPageBean.logOutAL}"/>
+                            </f:facet>
+                            <af:panelFormLayout id="pfl1" maxColumns="4">
+                              <af:panelLabelAndMessage label="#{bindings.EmployeeId.hints.label}"
+                                                       id="plam2">
+                                <af:outputText value="#{bindings.EmployeeId.inputValue}"
+                                               id="ot3">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.EmployeeId.format}"/>
+                                </af:outputText>
+                              </af:panelLabelAndMessage>
+                              <af:panelLabelAndMessage label="#{bindings.EmployeeName.hints.label}"
+                                                       id="plam5">
+                                <af:outputText value="#{bindings.EmployeeName.inputValue}"
+                                               id="ot1"/>
+                              </af:panelLabelAndMessage>
+                              <af:panelLabelAndMessage label="#{bindings.Role.hints.label}"
+                                                       id="plam4">
+                                <af:outputText value="#{bindings.Role.inputValue}"
+                                               id="ot4"/>
+                              </af:panelLabelAndMessage>
+                              <af:panelLabelAndMessage label="#{bindings.Password.hints.label}"
+                                                       id="plam3">
+                                <af:outputText value="#{bindings.Password.inputValue}"
+                                               id="ot2"/>
+                              </af:panelLabelAndMessage>
+                              <af:panelLabelAndMessage label="#{bindings.Leavesavailable.hints.label}"
+                                                       id="plam1">
+                                <af:outputText value="#{bindings.Leavesavailable.inputValue}"
+                                               id="ot5">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.Leavesavailable.format}"/>
+                                </af:outputText>
+                              </af:panelLabelAndMessage>
+                              <af:commandButton text="Change Password" id="cb1">
+                                <af:showPopupBehavior popupId="p1"
+                                                      triggerType="action"/>
+                              </af:commandButton>
+                            </af:panelFormLayout>
+                          </af:panelBox>
+                          <af:panelBox text="Pending Leaves For Approval" id="pb3"
+                                       rendered="#{sessionScope.role eq 'M'}"
+                                       partialTriggers="t4:cb6 t4:cb7">
+                            <f:facet name="toolbar"/>
+                            <af:table value="#{bindings.LeavesForApproval.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.LeavesForApproval.rangeSize}"
+                                      emptyText="#{bindings.LeavesForApproval.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.LeavesForApproval.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.LeavesForApprovalQuery.queryDescriptor}"
+                                      queryListener="#{bindings.LeavesForApprovalQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.LeavesForApproval.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.LeavesForApproval.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="t4"
+                                      styleClass="AFStretchWidth"
+                                      editingMode="clickToEdit"
+                                      binding="#{mainPageBean.leavesPendingTabBind}"
+                                      partialTriggers="cb6 cb7">
+                              <af:column sortProperty="LeaveId"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.LeaveId.label}"
+                                         id="c15">
+                                <af:inputText value="#{row.bindings.LeaveId.inputValue}"
+                                              label="#{bindings.LeavesForApproval.hints.LeaveId.label}"
+                                              required="#{bindings.LeavesForApproval.hints.LeaveId.mandatory}"
+                                              columns="#{bindings.LeavesForApproval.hints.LeaveId.displayWidth}"
+                                              maximumLength="#{bindings.LeavesForApproval.hints.LeaveId.precision}"
+                                              shortDesc="#{bindings.LeavesForApproval.hints.LeaveId.tooltip}"
+                                              id="it9">
+                                  <f:validator binding="#{row.bindings.LeaveId.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.LeavesForApproval.hints.LeaveId.format}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column sortProperty="EmployeeId"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.EmployeeId.label}"
+                                         id="c14">
+                                <af:inputText value="#{row.bindings.EmployeeId.inputValue}"
+                                              label="#{bindings.LeavesForApproval.hints.EmployeeId.label}"
+                                              required="#{bindings.LeavesForApproval.hints.EmployeeId.mandatory}"
+                                              columns="#{bindings.LeavesForApproval.hints.EmployeeId.displayWidth}"
+                                              maximumLength="#{bindings.LeavesForApproval.hints.EmployeeId.precision}"
+                                              shortDesc="#{bindings.LeavesForApproval.hints.EmployeeId.tooltip}"
+                                              id="it8">
+                                  <f:validator binding="#{row.bindings.EmployeeId.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.LeavesForApproval.hints.EmployeeId.format}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column sortProperty="LeaveType"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.LeaveType.label}"
+                                         id="c17">
+                                <af:selectOneChoice value="#{row.bindings.LeaveType.inputValue}"
+                                                    label="#{row.bindings.LeaveType.label}"
+                                                    required="#{bindings.LeavesForApproval.hints.LeaveType.mandatory}"
+                                                    shortDesc="#{bindings.LeavesForApproval.hints.LeaveType.tooltip}"
+                                                    id="soc6">
+                                  <f:selectItems value="#{row.bindings.LeaveType.items}"
+                                                 id="si5"/>
+                                </af:selectOneChoice>
+                              </af:column>
+                              <af:column sortProperty="FromDate"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.FromDate.label}"
+                                         id="c10">
+                                <f:facet name="filter">
+                                  <af:inputDate value="#{vs.filterCriteria.FromDate}"
+                                                id="id10"/>
+                                </f:facet>
+                                <af:inputDate value="#{row.bindings.FromDate.inputValue}"
+                                              label="#{bindings.LeavesForApproval.hints.FromDate.label}"
+                                              required="#{bindings.LeavesForApproval.hints.FromDate.mandatory}"
+                                              shortDesc="#{bindings.LeavesForApproval.hints.FromDate.tooltip}"
+                                              id="id9">
+                                  <f:validator binding="#{row.bindings.FromDate.validator}"/>
+                                  <af:convertDateTime pattern="#{bindings.LeavesForApproval.hints.FromDate.format}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column sortProperty="ToDate" filterable="true"
+                                         sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.ToDate.label}"
+                                         id="c11">
+                                <f:facet name="filter">
+                                  <af:inputDate value="#{vs.filterCriteria.ToDate}"
+                                                id="id8"/>
+                                </f:facet>
+                                <af:inputDate value="#{row.bindings.ToDate.inputValue}"
+                                              label="#{bindings.LeavesForApproval.hints.ToDate.label}"
+                                              required="#{bindings.LeavesForApproval.hints.ToDate.mandatory}"
+                                              shortDesc="#{bindings.LeavesForApproval.hints.ToDate.tooltip}"
+                                              id="id12">
+                                  <f:validator binding="#{row.bindings.ToDate.validator}"/>
+                                  <af:convertDateTime pattern="#{bindings.LeavesForApproval.hints.ToDate.format}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column sortProperty="Reason" filterable="true"
+                                         sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.Reason.label}"
+                                         id="c13">
+                                <af:inputText value="#{row.bindings.Reason.inputValue}"
+                                              label="#{bindings.LeavesForApproval.hints.Reason.label}"
+                                              required="#{bindings.LeavesForApproval.hints.Reason.mandatory}"
+                                              columns="#{bindings.LeavesForApproval.hints.Reason.displayWidth}"
+                                              maximumLength="#{bindings.LeavesForApproval.hints.Reason.precision}"
+                                              shortDesc="#{bindings.LeavesForApproval.hints.Reason.tooltip}"
+                                              id="it10">
+                                  <f:validator binding="#{row.bindings.Reason.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column sortProperty="AppliedDate"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.AppliedDate.label}"
+                                         id="c18">
+                                <f:facet name="filter">
+                                  <af:inputDate value="#{vs.filterCriteria.AppliedDate}"
+                                                id="id7"/>
+                                </f:facet>
+                                <af:inputDate value="#{row.bindings.AppliedDate.inputValue}"
+                                              label="#{bindings.LeavesForApproval.hints.AppliedDate.label}"
+                                              required="#{bindings.LeavesForApproval.hints.AppliedDate.mandatory}"
+                                              shortDesc="#{bindings.LeavesForApproval.hints.AppliedDate.tooltip}"
+                                              id="id11">
+                                  <f:validator binding="#{row.bindings.AppliedDate.validator}"/>
+                                  <af:convertDateTime pattern="#{bindings.LeavesForApproval.hints.AppliedDate.format}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column sortProperty="Days" filterable="true"
+                                         sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.Days.label}"
+                                         id="c16">
+                                <af:inputText value="#{row.bindings.Days.inputValue}"
+                                              label="#{bindings.LeavesForApproval.hints.Days.label}"
+                                              required="#{bindings.LeavesForApproval.hints.Days.mandatory}"
+                                              columns="#{bindings.LeavesForApproval.hints.Days.displayWidth}"
+                                              maximumLength="#{bindings.LeavesForApproval.hints.Days.precision}"
+                                              shortDesc="#{bindings.LeavesForApproval.hints.Days.tooltip}"
+                                              id="it7">
+                                  <f:validator binding="#{row.bindings.Days.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.LeavesForApproval.hints.Days.format}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column sortProperty="Status" filterable="true"
+                                         sortable="true"
+                                         headerText="#{bindings.LeavesForApproval.hints.Status.label}"
+                                         id="c12">
+                                <af:selectOneChoice value="#{row.bindings.Status.inputValue}"
+                                                    label="#{row.bindings.Status.label}"
+                                                    required="#{bindings.LeavesForApproval.hints.Status.mandatory}"
+                                                    shortDesc="#{bindings.LeavesForApproval.hints.Status.tooltip}"
+                                                    id="soc5">
+                                  <f:selectItems value="#{row.bindings.Status.items}"
+                                                 id="si6"/>
+                                </af:selectOneChoice>
+                              </af:column>
+                              <af:column id="c19" headerText="Approve">
+                                <af:commandButton text="Approve"
+                                                  id="cb6"
+                                                  actionListener="#{mainPageBean.approvingLeaveAL}"/>
+                              </af:column>
+                              <af:column id="c20" headerText="Reject">
+                                <af:commandButton text="Reject"
+                                                  id="cb7"
+                                                  actionListener="#{mainPageBean.rejectingLeaveAL}"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelBox>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                      <f:facet name="top">
+                        <af:panelGroupLayout layout="scroll"
+                                             xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                             id="pgl2">
+                          <af:popup id="p1" contentDelivery="lazyUncached">
+                            <af:panelWindow id="pw1">
+                              <af:panelGroupLayout id="pgl1">
+                                <af:panelFormLayout id="pfl2">
+                                  <f:facet name="footer">
+                                    <af:commandLink text="See Password Criteria"
+                                                    id="cl1">
+                                      <af:showPopupBehavior popupId="p2"
+                                                            triggerType="action"/>
+                                    </af:commandLink>
+                                  </f:facet>
+                                  <af:inputText label="Current Password"
+                                                id="it1"
+                                                binding="#{mainPageBean.currnetPassBind}"/>
+                                  <af:inputText label="New Password" id="it2"
+                                                binding="#{mainPageBean.newPassBind}"/>
+                                  <af:inputText label="Conform Password"
+                                                id="it3"
+                                                binding="#{mainPageBean.conformPassBind}"/>
+                                  <af:commandButton text="Save" id="cb2"
+                                                    actionListener="#{mainPageBean.savePassWord}"/>
+                                  <af:spacer width="10" height="10" id="s1"/>
+                                </af:panelFormLayout>
+                              </af:panelGroupLayout>
+                            </af:panelWindow>
+                          </af:popup>
+                          <af:popup id="p2">
+                            <af:panelWindow id="pw2">
+                              <af:panelGroupLayout id="pgl3">
+                                <af:panelBox text="Note" id="pb2">
+                                  <f:facet name="toolbar"/>
+                                  <af:panelFormLayout id="pfl3">
+                                    <f:facet name="footer"/>
+                                    <af:outputText value="Password Should Contain Minimum  8 Charecters and Maximum 20 Charecters"
+                                                   id="ot6"/>
+                                    <af:outputText value="It Should Contain Atlease 1 Capital Letter, 1 Small Leter, 1 Number and 1 Special Charecter"
+                                                   id="ot7"/>
+                                  </af:panelFormLayout>
+                                </af:panelBox>
+                              </af:panelGroupLayout>
+                            </af:panelWindow>
+                          </af:popup>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                    </af:decorativeBox>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Employee Details" id="sdi2"
+                                     rendered="#{sessionScope.role eq 'M'}"
+                                     stretchChildren="first"
+                                     inflexibleHeight="500">
+                    <af:panelStretchLayout id="psl2">
+                      <f:facet name="bottom">
+                        <af:popup id="p3" contentDelivery="lazyUncached"
+                                  binding="#{mainPageBean.r1}">
+                          <af:panelWindow id="pw3">
+                            <af:panelBox text="Add New Employee" id="pb5">
+                              <f:facet name="toolbar"/>
+                              <af:panelFormLayout id="pfl4">
+                                <af:inputText value="#{bindings.EmployeeId1.inputValue}"
+                                              label="#{bindings.EmployeeId1.hints.label}"
+                                              required="#{bindings.EmployeeId1.hints.mandatory}"
+                                              columns="#{bindings.EmployeeId1.hints.displayWidth}"
+                                              maximumLength="#{bindings.EmployeeId1.hints.precision}"
+                                              shortDesc="#{bindings.EmployeeId1.hints.tooltip}"
+                                              id="it14">
+                                  <f:validator binding="#{bindings.EmployeeId1.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.EmployeeId1.format}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.EmployeeName1.inputValue}"
+                                              label="#{bindings.EmployeeName1.hints.label}"
+                                              required="#{bindings.EmployeeName1.hints.mandatory}"
+                                              columns="#{bindings.EmployeeName1.hints.displayWidth}"
+                                              maximumLength="#{bindings.EmployeeName1.hints.precision}"
+                                              shortDesc="#{bindings.EmployeeName1.hints.tooltip}"
+                                              id="it15">
+                                  <f:validator binding="#{bindings.EmployeeName1.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Leavesavailable1.inputValue}"
+                                              label="#{bindings.Leavesavailable1.hints.label}"
+                                              required="#{bindings.Leavesavailable1.hints.mandatory}"
+                                              columns="#{bindings.Leavesavailable1.hints.displayWidth}"
+                                              maximumLength="#{bindings.Leavesavailable1.hints.precision}"
+                                              shortDesc="#{bindings.Leavesavailable1.hints.tooltip}"
+                                              id="it13">
+                                  <f:validator binding="#{bindings.Leavesavailable1.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.Leavesavailable1.format}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Password1.inputValue}"
+                                              label="#{bindings.Password1.hints.label}"
+                                              required="#{bindings.Password1.hints.mandatory}"
+                                              columns="#{bindings.Password1.hints.displayWidth}"
+                                              maximumLength="#{bindings.Password1.hints.precision}"
+                                              shortDesc="#{bindings.Password1.hints.tooltip}"
+                                              id="it16">
+                                  <f:validator binding="#{bindings.Password1.validator}"/>
+                                </af:inputText>
+                                <af:selectOneChoice value="#{bindings.Role1.inputValue}"
+                                                    label="#{bindings.Role1.label}"
+                                                    required="#{bindings.Role1.hints.mandatory}"
+                                                    shortDesc="#{bindings.Role1.hints.tooltip}"
+                                                    id="soc2">
+                                  <f:selectItems value="#{bindings.Role1.items}"
+                                                 id="si2"/>
+                                </af:selectOneChoice>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <f:facet name="footer">
+                                  <af:group id="g1">
+                                    <af:panelGroupLayout id="pgl7">
+                                      <af:commandButton actionListener="#{bindings.Commit.execute}"
+                                                        text="Save"
+                                                        disabled="#{!bindings.Commit.enabled}"
+                                                        id="cb3"/>
+                                      <af:commandButton actionListener="#{bindings.Rollback.execute}"
+                                                        text="Cancel"
+                                                        disabled="#{!bindings.Rollback.enabled}"
+                                                        immediate="true"
+                                                        id="cb4">
+                                        <af:resetActionListener/>
+                                      </af:commandButton>
+                                    </af:panelGroupLayout>
+                                  </af:group>
+                                </f:facet>
+                              </af:panelFormLayout>
+                            </af:panelBox>
+                          </af:panelWindow>
+                        </af:popup>
+                      </f:facet>
+                      <f:facet name="center">
+                        <af:panelGroupLayout layout="scroll" id="pgl5"
+                                             styleClass="AFStretchWidth">
+                          <af:panelHeader text="EmployeesEO" id="ph1">
+                            <af:query id="qryId1" headerText="Search"
+                                      disclosed="true"
+                                      value="#{bindings.SearchEmployeesQuery.queryDescriptor}"
+                                      model="#{bindings.SearchEmployeesQuery.queryModel}"
+                                      queryListener="#{bindings.SearchEmployeesQuery.processQuery}"
+                                      queryOperationListener="#{bindings.SearchEmployeesQuery.processQueryOperation}"
+                                      resultComponentId="::pc1:resId1"
+                                      styleClass="AFStretchWidth"/>
+                          </af:panelHeader>
+                          <af:panelCollection id="pc1"
+                                              styleClass="AFStretchWidth">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar">
+                              <af:toolbar id="t3">
+                                <af:commandToolbarButton text="Add New Employee"
+                                                         id="ctb1"
+                                                         actionListener="#{mainPageBean.addEmployeeAL}"/>
+                              </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.AllEmployeesVO11.collectionModel}"
+                                      var="row"
+                                      rows="#{bindings.AllEmployeesVO11.rangeSize}"
+                                      emptyText="#{bindings.AllEmployeesVO11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.AllEmployeesVO11.rangeSize}"
+                                      rowBandingInterval="0"
+                                      filterModel="#{bindings.SearchEmployeesQuery.queryDescriptor}"
+                                      queryListener="#{bindings.SearchEmployeesQuery.processQuery}"
+                                      filterVisible="true" varStatus="vs"
+                                      selectedRowKeys="#{bindings.AllEmployeesVO11.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.AllEmployeesVO11.collectionModel.makeCurrent}"
+                                      rowSelection="single" id="resId1"
+                                      styleClass="AFStretchWidth">
+                              <af:column sortProperty="EmployeeId"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.AllEmployeesVO11.hints.EmployeeId.label}"
+                                         id="resId1c1">
+                                <af:outputText value="#{row.EmployeeId}"
+                                               id="ot11">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.AllEmployeesVO11.hints.EmployeeId.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="EmployeeName"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.AllEmployeesVO11.hints.EmployeeName.label}"
+                                         id="resId1c2">
+                                <af:outputText value="#{row.EmployeeName}"
+                                               id="ot9"/>
+                              </af:column>
+                              <af:column sortProperty="Leavesavailable"
+                                         filterable="true" sortable="true"
+                                         headerText="#{bindings.AllEmployeesVO11.hints.Leavesavailable.label}"
+                                         id="resId1c3">
+                                <af:outputText value="#{row.Leavesavailable}"
+                                               id="ot8">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.AllEmployeesVO11.hints.Leavesavailable.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="Role" filterable="true"
+                                         sortable="true"
+                                         headerText="#{bindings.AllEmployeesVO11.hints.Role.label}"
+                                         id="resId1c4">
+                                <af:outputText value="#{row.Role}" id="ot10"/>
+                              </af:column>
+                            </af:table>
+                          </af:panelCollection>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                      <f:facet name="start"/>
+                      <f:facet name="end"/>
+                      <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="My Leaves" id="sdi3"
+                                     stretchChildren="first">
+                    <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+                      <f:facet name="menus"/>
+                      <f:facet name="toolbar">
+                        <af:toolbar id="t2">
+                          <af:commandToolbarButton text="Apply Leave"
+                                                   id="ctb2"
+                                                   actionListener="#{mainPageBean.applyLeavePopupAL}"/>
+                          <af:outputFormatted value="Available Leaves : #{bindings.Leavesavailable.inputValue}"
+                                              id="of1"/>
+                        </af:toolbar>
+                      </f:facet>
+                      <f:facet name="statusbar"/>
+                      <af:table value="#{bindings.EmpLeavesVO.collectionModel}"
+                                var="row"
+                                rows="#{bindings.EmpLeavesVO.rangeSize}"
+                                emptyText="#{bindings.EmpLeavesVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                fetchSize="#{bindings.EmpLeavesVO.rangeSize}"
+                                rowBandingInterval="0"
+                                filterModel="#{bindings.EmpLeavesVOQuery.queryDescriptor}"
+                                queryListener="#{bindings.EmpLeavesVOQuery.processQuery}"
+                                filterVisible="true" varStatus="vs"
+                                selectedRowKeys="#{bindings.EmpLeavesVO.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.EmpLeavesVO.collectionModel.makeCurrent}"
+                                rowSelection="single" id="t1">
+                        <af:column sortProperty="LeaveId" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.LeaveId.label}"
+                                   id="c8">
+                          <af:outputText value="#{row.LeaveId}" id="ot18">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmpLeavesVO.hints.LeaveId.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="EmployeeId" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.EmployeeId.label}"
+                                   id="c1">
+                          <af:outputText value="#{row.EmployeeId}" id="ot19">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmpLeavesVO.hints.EmployeeId.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="AppliedDate" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.AppliedDate.label}"
+                                   id="c4">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.AppliedDate}"
+                                          id="id2"/>
+                          </f:facet>
+                          <af:outputText value="#{row.AppliedDate}" id="ot16">
+                            <af:convertDateTime pattern="#{bindings.EmpLeavesVO.hints.AppliedDate.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="LeaveType"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.LeaveType.label}"
+                                   id="c5">
+                          <af:selectOneChoice value="#{row.bindings.LeaveType.inputValue}"
+                                              label="#{row.bindings.LeaveType.label}" disabled="true"
+                                              required="#{bindings.EmpLeavesVO.hints.LeaveType.mandatory}"
+                                              shortDesc="#{bindings.EmpLeavesVO.hints.LeaveType.tooltip}"
+                                              id="soc1">
+                            <f:selectItems value="#{row.bindings.LeaveType.items}"
+                                           id="si1"/>
+                          </af:selectOneChoice>
+                        </af:column>
+                        <af:column sortProperty="FromDate" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.FromDate.label}"
+                                   id="c6">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.FromDate}"
+                                          id="id1"/>
+                          </f:facet>
+                          <af:outputText value="#{row.FromDate}" id="ot20">
+                            <af:convertDateTime pattern="#{bindings.EmpLeavesVO.hints.FromDate.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="ToDate" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.ToDate.label}"
+                                   id="c9">
+                          <f:facet name="filter">
+                            <af:inputDate value="#{vs.filterCriteria.ToDate}"
+                                          id="id3"/>
+                          </f:facet>
+                          <af:outputText value="#{row.ToDate}" id="ot12">
+                            <af:convertDateTime pattern="#{bindings.EmpLeavesVO.hints.ToDate.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="Days" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.Days.label}"
+                                   id="c7">
+                          <af:outputText value="#{row.Days}" id="ot15">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmpLeavesVO.hints.Days.format}"/>
+                          </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="Reason" filterable="true"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.Reason.label}"
+                                   id="c3">
+                          <af:outputText value="#{row.Reason}" id="ot14"/>
+                        </af:column>
+                        <af:column sortProperty="Status"
+                                   sortable="true"
+                                   headerText="#{bindings.EmpLeavesVO.hints.Status.label}"
+                                   id="c2">
+                          <af:selectOneChoice value="#{row.bindings.Status.inputValue}"
+                                              label="#{row.bindings.Status.label}" disabled="true"
+                                              required="#{bindings.EmpLeavesVO.hints.Status.mandatory}"
+                                              shortDesc="#{bindings.EmpLeavesVO.hints.Status.tooltip}"
+                                              id="soc3">
+                            <f:selectItems value="#{row.bindings.Status.items}"
+                                           id="si3"/>
+                          </af:selectOneChoice>
+                        </af:column>
+                      </af:table>
+                    </af:panelCollection>
+                    <af:popup id="p4" contentDelivery="lazyUncached"
+                              binding="#{mainPageBean.r2}">
+                      <af:panelWindow id="pw4" title="Apply Leave">
+                        <af:panelGroupLayout id="pgl4">
+                          <af:panelFormLayout id="pfl5">
+                            <af:inputText value="#{bindings.EmployeeId2.inputValue}"
+                                          label="#{bindings.EmployeeId2.hints.label}"
+                                          required="#{bindings.EmployeeId2.hints.mandatory}"
+                                          columns="#{bindings.EmployeeId2.hints.displayWidth}"
+                                          maximumLength="#{bindings.EmployeeId2.hints.precision}"
+                                          shortDesc="#{bindings.EmployeeId2.hints.tooltip}"
+                                          id="it4">
+                              <f:validator binding="#{bindings.EmployeeId2.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.EmployeeId2.format}"/>
+                            </af:inputText>
+                            <af:inputDate value="#{bindings.AppliedDate.inputValue}"
+                                          label="#{bindings.AppliedDate.hints.label}"
+                                          required="#{bindings.AppliedDate.hints.mandatory}"
+                                          shortDesc="#{bindings.AppliedDate.hints.tooltip}"
+                                          id="id5">
+                              <f:validator binding="#{bindings.AppliedDate.validator}"/>
+                              <af:convertDateTime pattern="#{bindings.AppliedDate.format}"/>
+                            </af:inputDate>
+                            <af:selectOneChoice value="#{bindings.LeaveType.inputValue}"
+                                                label="#{bindings.LeaveType.label}"
+                                                required="#{bindings.LeaveType.hints.mandatory}"
+                                                shortDesc="#{bindings.LeaveType.hints.tooltip}"
+                                                id="soc4">
+                              <f:selectItems value="#{bindings.LeaveType.items}"
+                                             id="si4"/>
+                            </af:selectOneChoice>
+                            <af:inputDate value="#{bindings.FromDate.inputValue}"
+                                          label="#{bindings.FromDate.hints.label}"
+                                          required="#{bindings.FromDate.hints.mandatory}"
+                                          shortDesc="#{bindings.FromDate.hints.tooltip}"
+                                          id="id4" autoSubmit="true">
+                              <f:validator binding="#{bindings.FromDate.validator}"/>
+                              <af:convertDateTime pattern="#{bindings.FromDate.format}"/>
+                            </af:inputDate>
+                            <af:inputDate value="#{bindings.ToDate.inputValue}"
+                                          label="#{bindings.ToDate.hints.label}"
+                                          required="#{bindings.ToDate.hints.mandatory}"
+                                          shortDesc="#{bindings.ToDate.hints.tooltip}"
+                                          id="id6" autoSubmit="true">
+                              <f:validator binding="#{bindings.ToDate.validator}"/>
+                              <af:convertDateTime pattern="#{bindings.ToDate.format}"/>
+                            </af:inputDate>
+                            <af:inputText value="#{bindings.Reason.inputValue}"
+                                          label="#{bindings.Reason.hints.label}"
+                                          required="#{bindings.Reason.hints.mandatory}"
+                                          columns="#{bindings.Reason.hints.displayWidth}"
+                                          maximumLength="#{bindings.Reason.hints.precision}"
+                                          shortDesc="#{bindings.Reason.hints.tooltip}"
+                                          id="it6" rows="2">
+                              <f:validator binding="#{bindings.Reason.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Days.inputValue}"
+                                          label="#{bindings.Days.hints.label}"
+                                          required="#{bindings.Days.hints.mandatory}"
+                                          columns="#{bindings.Days.hints.displayWidth}"
+                                          maximumLength="#{bindings.Days.hints.precision}"
+                                          shortDesc="#{bindings.Days.hints.tooltip}"
+                                          id="it5" partialTriggers="id4 id6">
+                              <f:validator binding="#{bindings.Days.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.Days.format}"/>
+                            </af:inputText>
+                            <af:spacer width="10" height="10" id="s3"/>
+                            <f:facet name="footer">
+                              <af:group id="g2">
+                                <af:panelGroupLayout id="pgl6"
+                                                     layout="horizontal">
+                                  <af:commandButton text="  Apply  " id="cb5"
+                                                    actionListener="#{mainPageBean.applyLeaveAL}"/>
+                                  <af:commandToolbarButton actionListener="#{bindings.Rollback.execute}"
+                                                           text="Cancel"
+                                                           disabled="#{!bindings.Rollback.enabled}"
+                                                           immediate="true"
+                                                           id="ctb3">
+                                    <af:resetActionListener/>
+                                  </af:commandToolbarButton>
+                                </af:panelGroupLayout>
+                              </af:group>
+                            </f:facet>
+                          </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                      </af:panelWindow>
+                    </af:popup>
+                  </af:showDetailItem>
+                </af:panelTabbed>
+              </f:facet>
+              <f:facet name="start"/>
+              <f:facet name="end"/>
+              <f:facet name="top"/>
+            </af:panelStretchLayout>
+          </f:facet>
+          <f:facet name="start"/>
+          <f:facet name="end"/>
+          <f:facet name="top">
+            <af:panelGroupLayout id="pgl9" styleClass="AFStretchWidth"
+                                 halign="right" layout="horizontal"
+                                 valign="middle">
+              <af:menuBar id="mb1">
+                <af:commandButton text="LogOut" id="cb8"
+                                  action="#{mainPageBean.logOutAction}"/>
+              </af:menuBar>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

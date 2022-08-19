@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="MainViewPageDef"
+                Package="view.pageDefs"
+                ControllerClass="view.bean.MainPageController">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="LoggedEmpVO" RangeSize="25"
+              DataControl="AppModuleDataControl" id="LoggedEmpVOIterator"/>
+    <iterator Binds="AllEmployeesVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="AllEmployeesVO1Iterator"/>
+    <searchRegion Criteria="SearchEmployees"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="AllEmployeesVO1Iterator" id="SearchEmployeesQuery"/>
+    <iterator Binds="EmpLeavesVO" RangeSize="25"
+              DataControl="AppModuleDataControl" id="EmpLeavesVOIterator"/>
+    <searchRegion Binds="EmpLeavesVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="EmpLeavesVOQuery"/>
+    <iterator Binds="LeavesForApproval" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="LeavesForApprovalIterator"/>
+    <searchRegion Binds="LeavesForApprovalIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="LeavesForApprovalQuery"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="LoggedEmpVOIterator" id="EmployeeId">
+      <AttrNames>
+        <Item Value="EmployeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LoggedEmpVOIterator" id="EmployeeName">
+      <AttrNames>
+        <Item Value="EmployeeName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LoggedEmpVOIterator" id="Role">
+      <AttrNames>
+        <Item Value="Role"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LoggedEmpVOIterator" id="Password">
+      <AttrNames>
+        <Item Value="Password"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="LoggedEmpVOIterator" id="Leavesavailable">
+      <AttrNames>
+        <Item Value="Leavesavailable"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <tree IterBinding="AllEmployeesVO1Iterator" id="AllEmployeesVO11">
+      <nodeDefinition DefName="model.Views.AllEmployeesVO"
+                      Name="AllEmployeesVO110">
+        <AttrNames>
+          <Item Value="EmployeeId"/>
+          <Item Value="EmployeeName"/>
+          <Item Value="Leavesavailable"/>
+          <Item Value="Role"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="AllEmployeesVO1Iterator" id="EmployeeId1">
+      <AttrNames>
+        <Item Value="EmployeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AllEmployeesVO1Iterator" id="EmployeeName1">
+      <AttrNames>
+        <Item Value="EmployeeName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AllEmployeesVO1Iterator"
+                     id="Leavesavailable1">
+      <AttrNames>
+        <Item Value="Leavesavailable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AllEmployeesVO1Iterator" id="Password1">
+      <AttrNames>
+        <Item Value="Password"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AllEmployeesVO1Iterator" StaticList="false"
+          Uses="LOV_Role" id="Role1" DTSupportsMRU="false"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <action IterBinding="AllEmployeesVO1Iterator" id="CreateInsert"
+            InstanceName="AppModuleDataControl.AllEmployeesVO1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <tree IterBinding="EmpLeavesVOIterator" id="EmpLeavesVO">
+      <nodeDefinition DefName="model.Views.LeavesVO" Name="EmpLeavesVO0">
+        <AttrNames>
+          <Item Value="LeaveId"/>
+          <Item Value="EmployeeId"/>
+          <Item Value="AppliedDate"/>
+          <Item Value="LeaveType"/>
+          <Item Value="FromDate"/>
+          <Item Value="ToDate"/>
+          <Item Value="Days"/>
+          <Item Value="Reason"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="EmpLeavesVOIterator" id="EmployeeId2">
+      <AttrNames>
+        <Item Value="EmployeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmpLeavesVOIterator" id="AppliedDate">
+      <AttrNames>
+        <Item Value="AppliedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="EmpLeavesVOIterator" StaticList="false"
+          Uses="LOV_LeaveType" id="LeaveType" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="EmpLeavesVOIterator" id="FromDate">
+      <AttrNames>
+        <Item Value="FromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmpLeavesVOIterator" id="ToDate">
+      <AttrNames>
+        <Item Value="ToDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmpLeavesVOIterator" id="Reason">
+      <AttrNames>
+        <Item Value="Reason"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmpLeavesVOIterator" id="Days">
+      <AttrNames>
+        <Item Value="Days"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="EmpLeavesVOIterator" id="CreateInsert1"
+            InstanceName="AppModuleDataControl.EmpLeavesVO"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <tree IterBinding="LeavesForApprovalIterator" id="LeavesForApproval">
+      <nodeDefinition DefName="model.Views.LeavesVO" Name="LeavesForApproval0">
+        <AttrNames>
+          <Item Value="LeaveId"/>
+          <Item Value="EmployeeId"/>
+          <Item Value="LeaveType"/>
+          <Item Value="FromDate"/>
+          <Item Value="ToDate"/>
+          <Item Value="Reason"/>
+          <Item Value="AppliedDate"/>
+          <Item Value="Days"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>
